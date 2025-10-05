@@ -26,7 +26,7 @@
 ### 1. Клонируем и настраиваем
 
 ```bash
-git clone <ссылка_на_репозиторий>
+git clone https://github.com/MikoKyatto/partner_bot.git
 cd lethai-bot
 cp env.example .env
 ```
