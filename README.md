@@ -1,197 +1,197 @@
 # Lethai Concierge Referral Bot 🏝️
 
-A production-ready Telegram bot for the Lethai concierge service referral program. The bot issues unique referral links, generates QR code images, integrates with Google Sheets for balance tracking, and supports admin approval workflow.
+**Крутой Telegram-бот для реферальной программы Lethai Concierge!**  
+Готовое решение для бизнеса: выдача уникальных реферальных ссылок, создание стильных QR-кодов, интеграция с Google Sheets для учёта балансов и удобная админ-панель с процессом одобрения пользователей.
 
-## Features
+## 🔥 Ключевые фичи
 
-- 🔗 **Unique Referral Links**: Each user gets a personalized referral link (`https://taplink.cc/lakeevainfo?ref=<partnercode>`)
-- 📱 **QR Code Generation**: Beautiful QR codes with Lethai branding and palm tree silhouettes
-- 📊 **Google Sheets Integration**: Automatic balance tracking and partner management
-- 👥 **Admin Panel**: Approve/reject users with inline buttons
-- 🗄️ **SQLite Database**: User data storage with approval workflow
-- 🐳 **Docker Support**: Containerized for easy deployment
-- 🧪 **Unit Tests**: Comprehensive test coverage
-- 🔒 **Security**: Environment variables, non-root user, input validation
+- 🔗 **Уникальные реферальные ссылки**: Каждый пользователь получает персональную ссылку вида `https://taplink.cc/lakeevainfo?ref=<код_партнёра>`  
+- 📱 **Стильные QR-коды**: Генерация QR-кодов с брендингом Lethai и силуэтами пальм  
+- 📊 **Интеграция с Google Sheets**: Автоматический учёт балансов и управление партнёрами  
+- 👥 **Админ-панель**: Одобрение или отклонение пользователей с помощью удобных кнопок  
+- 🗄️ **База данных SQLite**: Надёжное хранение данных пользователей с процессом одобрения  
+- 🐳 **Поддержка Docker**: Лёгкое развертывание в контейнерах  
+- 🧪 **Тесты**: Полное покрытие кода тестами  
+- 🔒 **Безопасность**: Защита данных, валидация ввода, запуск от имени не-root пользователя  
 
-## Quick Start
+## 🚀 Быстрый старт
 
-### Prerequisites
+### Что понадобится
 
-- Python 3.10+
-- Docker and Docker Compose
-- Google Cloud Service Account with Sheets API access
-- Telegram Bot Token
+- Python 3.10+  
+- Docker и Docker Compose  
+- Аккаунт Google Cloud с доступом к Google Sheets API  
+- Токен Telegram-бота  
 
-### 1. Clone and Setup
+### 1. Клонируем и настраиваем
 
 ```bash
-git clone <repository-url>
+git clone <ссылка_на_репозиторий>
 cd lethai-bot
 cp env.example .env
 ```
 
-### 2. Configure Environment
+### 2. Настраиваем переменные окружения
 
-Edit `.env` file:
+Отредактируйте файл `.env`:
 
 ```env
-BOT_TOKEN=your_bot_token_here
-SHEETS_ID=your_google_sheets_id_here
+BOT_TOKEN=ваш_токен_бота
+SHEETS_ID=ID_вашей_таблицы_в_Google_Sheets
 CREDENTIALS_PATH=credentials.json
-ADMIN_GROUP_ID=-100UNgKEPL64LxjNDky
-ADMIN_USER_ID=1454702347
+ADMIN_GROUP_ID=ID_группы_администраторов
+ADMIN_USER_ID=ID_администратора
 ```
 
-### 3. Google Sheets Setup
+### 3. Настраиваем Google Sheets
 
-1. Create a Google Cloud Project
-2. Enable Google Sheets API
-3. Create a Service Account
-4. Download the JSON credentials file as `credentials.json`
-5. Share your Google Sheet with the service account email
+1. Создайте проект в Google Cloud  
+2. Включите Google Sheets API  
+3. Создайте сервисный аккаунт и скачайте JSON-файл ключей как `credentials.json`  
+4. Откройте доступ к вашей Google-таблице для email сервисного аккаунта  
 
-### 4. Run with Docker
+### 4. Запускаем с Docker
 
 ```bash
-# Build and start
+# Сборка и запуск
 docker-compose up --build
 
-# Run in background
+# Запуск в фоновом режиме
 docker-compose up -d --build
 
-# View logs
+# Просмотр логов
 docker-compose logs -f lethai-bot
 ```
 
-### 5. Run Locally (Development)
+### 5. Локальный запуск (для разработки)
 
 ```bash
-# Install dependencies
+# Установка зависимостей
 pip install -r requirements.txt
 
-# Run the bot
+# Запуск бота
 python main.py
 ```
 
-## Project Structure
+## 📂 Структура проекта
 
 ```
 lethai-bot/
-├── handlers/                 # Bot command handlers
-│   ├── start.py             # Registration and main menu
-│   ├── admin.py             # Admin commands and approval
-│   └── menu.py              # User menu commands
-├── utils/                   # Utility modules
-│   ├── database.py          # SQLite operations
-│   ├── sheets.py            # Google Sheets integration
-│   └── qr_code.py           # QR code generation
-├── tests/                   # Unit tests
-│   ├── test_handlers.py     # Handler tests
-│   ├── test_sheets.py       # Sheets integration tests
-│   ├── test_database.py     # Database tests
-│   └── test_qr_code.py      # QR code tests
-├── main.py                  # Bot entry point
-├── requirements.txt         # Python dependencies
-├── Dockerfile              # Docker configuration
-├── docker-compose.yml      # Docker Compose setup
-├── .env                    # Environment variables
-├── credentials.json        # Google service account
-└── README.md              # This file
+├── handlers/                 # Обработчики команд бота
+│   ├── start.py             # Регистрация и главное меню
+│   ├── admin.py             # Команды админа и процесс одобрения
+│   └── menu.py              # Команды пользовательского меню
+├── utils/                   # Вспомогательные модули
+│   ├── database.py          # Работа с SQLite
+│   ├── sheets.py            # Интеграция с Google Sheets
+│   └── qr_code.py           # Генерация QR-кодов
+├── tests/                   # Тесты
+│   ├── test_handlers.py     # Тесты обработчиков
+│   ├── test_sheets.py       # Тесты интеграции с Sheets
+│   ├── test_database.py     # Тесты базы данных
+│   └── test_qr_code.py      # Тесты QR-кодов
+├── main.py                  # Точка входа бота
+├── requirements.txt         # Зависимости Python
+├── Dockerfile              # Конфигурация Docker
+├── docker-compose.yml      # Настройки Docker Compose
+├── .env                    # Переменные окружения
+├── credentials.json        # Ключи сервисного аккаунта Google
+└── README.md              # Этот файл
 ```
 
-## Bot Commands
+## 🤖 Команды бота
 
-### User Commands
+### Для пользователей
 
-- `/start` - Start registration or access main menu
-- **Моя реферальная ссылка** - Get your referral link and QR code
-- **Посмотреть баланс** - Check your current balance
-- **Поддержка** - Contact support
+- `/start` — Начать регистрацию или открыть главное меню  
+- **Моя реферальная ссылка** — Получить персональную ссылку и QR-код  
+- **Посмотреть баланс** — Узнать текущий баланс  
+- **Поддержка** — Связаться с техподдержкой  
 
-### Admin Commands
+### Для админов
 
-- `/admin` - Access admin panel for user approval
-- `/stats` - View system statistics
-- `/users` - List all approved users
+- `/admin` — Открыть панель администрирования  
+- `/stats` — Посмотреть статистику системы  
+- `/users` — Список всех одобренных пользователей  
 
-## User Flow
+## 🔄 Путь пользователя
 
-1. **Registration**: User sends `/start` and shares contact
-2. **Approval**: Admin reviews and approves user in admin panel
-3. **Access**: Approved users get access to referral features
-4. **Referrals**: Users share their unique link and earn bonuses
-5. **Balance**: Balance is tracked in Google Sheets automatically
+1. **Регистрация**: Пользователь отправляет `/start` и делится контактом  
+2. **Одобрение**: Админ проверяет и одобряет пользователя в панели  
+3. **Доступ**: Одобренные пользователи получают доступ к реферальным функциям  
+4. **Рефералы**: Пользователи делятся ссылками и зарабатывают бонусы  
+5. **Баланс**: Баланс автоматически обновляется в Google Sheets  
 
-## Google Sheets Integration
+## 📊 Интеграция с Google Sheets
 
-The bot integrates with Google Sheets for balance tracking:
+Бот синхронизируется с Google Sheets для учёта балансов:  
 
-- **Sheet Structure**: First column is partnercode (Telegram ID)
-- **Balance Calculation**: Sums all numeric values in user's row
-- **Auto-Update**: New partnercodes added on approval
-- **Manual Tracking**: Supports manual entry of referral bonuses
+- **Структура таблицы**: Первый столбец — partnercode (Telegram ID)  
+- **Расчёт баланса**: Суммируются все числовые значения в строке пользователя  
+- **Автообновление**: Новые partnercode добавляются при одобрении  
+- **Ручной учёт**: Поддержка ручного добавления бонусов  
 
-### Recommended Sheet Structure
+### Рекомендуемая структура таблицы
 
-| partnercode | date | action | amount1 | amount2 | amount3 |
-|-------------|------|--------|---------|---------|---------|
-| 12345 | 2024-01-01 | signup | 100.50 | 200.75 | 50.25 |
-| 67890 | 2024-01-02 | signup | 300.00 | 150.00 | |
+| partnercode | date       | action | amount1 | amount2 | amount3 |
+|-------------|------------|--------|---------|---------|---------|
+| 12345       | 2024-01-01 | signup | 100.50  | 200.75  | 50.25   |
+| 67890       | 2024-01-02 | signup | 300.00  | 150.00  |         |
 
-## QR Code Design
+## 🎨 Дизайн QR-кодов
 
-Generated QR codes feature:
-- **Size**: 512x512 pixels
-- **Background**: Dark green (#1A3C34)
-- **QR Code**: 400x400 pixels, centered
-- **Branding**: "Lethai" text in white
-- **Decoration**: Palm tree silhouettes
-- **Format**: High-quality JPEG
+QR-коды генерируются с учётом брендинга:  
+- **Размер**: 512x512 пикселей  
+- **Фон**: Тёмно-зелёный (#1A3C34)  
+- **QR-код**: 400x400 пикселей, по центру  
+- **Брендинг**: Текст "Lethai" белым цветом  
+- **Декор**: Силуэты пальм  
+- **Формат**: Высококачественный JPEG  
 
-## Testing
+## 🧪 Тестирование
 
-Run the test suite:
+Запуск тестов:
 
 ```bash
-# Run all tests
+# Все тесты
 pytest
 
-# Run with coverage
+# Тесты с покрытием
 pytest --cov=.
 
-# Run specific test file
+# Тестирование конкретного файла
 pytest tests/test_handlers.py
 
-# Run with verbose output
+# Подробный вывод
 pytest -v
 ```
 
-## Deployment
+## 🚀 Развертывание
 
-### VPS Deployment
+### На VPS
 
-1. **Upload files** to your VPS
-2. **Configure environment** variables
-3. **Run with Docker**:
+1. **Загрузите файлы** на сервер  
+2. **Настройте переменные окружения** в `.env`  
+3. **Запустите с Docker**:
 
 ```bash
-# Production deployment
+# Развертывание в продакшене
 docker-compose -f docker-compose.yml up -d
 
-# Check status
+# Проверка статуса
 docker-compose ps
 
-# View logs
+# Просмотр логов
 docker-compose logs -f
 ```
 
-### Docker Commands
+### Команды Docker
 
 ```bash
-# Build image
+# Сборка образа
 docker build -t lethai-bot .
 
-# Run container
+# Запуск контейнера
 docker run -d \
   --name lethai-bot \
   --env-file .env \
@@ -199,132 +199,131 @@ docker run -d \
   -v $(pwd)/data:/app/data \
   lethai-bot
 
-# Stop container
+# Остановка контейнера
 docker stop lethai-bot
 
-# Remove container
+# Удаление контейнера
 docker rm lethai-bot
 ```
 
-## Configuration
+## ⚙️ Конфигурация
 
-### Environment Variables
+### Переменные окружения
 
-| Variable | Description | Example |
-|----------|-------------|---------|
-| `BOT_TOKEN` | Telegram bot token | `123456789:ABC...` |
-| `SHEETS_ID` | Google Sheets ID | `18dY652fOqEJ6EC1ppMlMF0Obzlzu32xxVXt5AJ9415A` |
-| `CREDENTIALS_PATH` | Path to service account JSON | `credentials.json` |
-| `ADMIN_GROUP_ID` | Admin notification group | `-100UNgKEPL64LxjNDky` |
-| `ADMIN_USER_ID` | Admin user ID | `1454702347` |
+| Переменная          | Описание                          | Пример                              |
+|---------------------|-----------------------------------|-------------------------------------|
+| `BOT_TOKEN`         | Токен Telegram-бота              | `123456789:ABC...`                 |
+| `SHEETS_ID`         | ID Google Sheets                 | `18dY652fOqEJ6EC1ppMlMF00bzlzu32xxVXt5AJ9415A` |
+| `CREDENTIALS_PATH`  | Путь к JSON сервисного аккаунта  | `credentials.json`                  |
+| `ADMIN_GROUP_ID`    | ID группы администраторов        | `-100UNgKEPL94LxjNDky`            |
+| `ADMIN_USER_ID`     | ID администратора                | `1454792347`                       |
 
-### Google Sheets Permissions
+### Права в Google Sheets
 
-The service account needs:
-- **Viewer** access to the spreadsheet
-- **Editor** access to the specific sheet (Лист1)
+Сервисный аккаунт должен иметь:  
+- **Viewer** — доступ к таблице  
+- **Editor** — доступ к конкретному листу (Лист1)  
 
-## Security
+## 🔒 Безопасность
 
-- ✅ Environment variables for sensitive data
-- ✅ Non-root Docker user
-- ✅ Input validation and sanitization
-- ✅ Error handling and logging
-- ✅ Rate limiting (via aiogram)
-- ✅ SQL injection protection (parameterized queries)
+- ✅ Хранение конфиденциальных данных в переменных окружения  
+- ✅ Запуск контейнера от имени не-root пользователя  
+- ✅ Валидация и очистка пользовательского ввода  
+- ✅ Обработка ошибок и логирование  
+- ✅ Ограничение скорости (через aiogram)  
+- ✅ Защита от SQL-инъекций (параметризованные запросы)  
 
-## Monitoring
+## 📈 Мониторинг
 
-### Logs
+### Логи
 
 ```bash
-# View bot logs
+# Просмотр логов бота
 docker-compose logs -f lethai-bot
 
-# View specific log level
+# Фильтрация по уровню ошибок
 docker-compose logs -f lethai-bot | grep ERROR
 ```
 
-### Health Checks
+### Проверки состояния
 
-The bot includes health checks:
-- Database connectivity
-- Google Sheets API access
-- Bot token validation
+Бот включает проверки:  
+- Подключение к базе данных  
+- Доступ к Google Sheets API  
+- Валидность токена бота  
 
-## Troubleshooting
+## 🛠️ Устранение неполадок
 
-### Common Issues
+### Частые проблемы
 
-1. **Bot not responding**
-   - Check BOT_TOKEN in .env
-   - Verify bot is running: `docker-compose ps`
-   - Check logs: `docker-compose logs lethai-bot`
+1. **Бот не отвечает**  
+   - Проверьте `BOT_TOKEN` в `.env`  
+   - Убедитесь, что бот запущен: `docker-compose ps`  
+   - Просмотрите логи: `docker-compose logs lethai-bot`  
 
-2. **Google Sheets errors**
-   - Verify credentials.json exists
-   - Check service account permissions
-   - Ensure Sheets API is enabled
+2. **Ошибки Google Sheets**  
+   - Убедитесь, что файл `credentials.json` существует  
+   - Проверьте права сервисного аккаунта  
+   - Убедитесь, что API Google Sheets включён  
 
-3. **Database errors**
-   - Check file permissions
-   - Verify SQLite installation
-   - Check disk space
+3. **Ошибки базы данных**  
+   - Проверьте права доступа к файлам  
+   - Убедитесь, что SQLite установлен  
+   - Проверьте свободное место на диске  
 
-### Debug Mode
+### Режим отладки
 
-Enable debug logging:
+Включите отладочное логирование:
 
 ```python
-# In main.py, change logging level
+# В main.py измените уровень логирования
 logging.basicConfig(level=logging.DEBUG)
 ```
 
-## Development
+## 💻 Разработка
 
-### Local Development
+### Локальная разработка
 
 ```bash
-# Install development dependencies
+# Установка зависимостей
 pip install -r requirements.txt
 pip install pytest pytest-cov
 
-# Run tests
+# Запуск тестов
 pytest
 
-# Run bot in development mode
+# Запуск бота в режиме разработки
 python main.py
 ```
 
-### Code Style
+### Стиль кода
 
-- Follow PEP 8
-- Use type hints
-- Add docstrings
-- Write tests for new features
+- Соблюдайте PEP 8  
+- Используйте аннотации типов  
+- Добавляйте докстринги  
+- Пишите тесты для новых функций  
 
-## Contributing
+## 🤝 Как внести вклад
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+1. Сделайте форк репозитория  
+2. Создайте ветку для новой функции  
+3. Внесите изменения  
+4. Добавьте тесты  
+5. Отправьте Pull Request  
 
-## License
+## 📜 Лицензия
 
-This project is proprietary software for Lethai Concierge Services.
+Это проприетарное ПО, созданное для Lethai Concierge Services.
 
-## Support
+## 🆘 Поддержка
 
-For technical support:
-- Create an issue in the repository
-- Contact the development team
-- Check the troubleshooting section
+Для технической поддержки:  
+- Создайте issue в репозитории  
+- Свяжитесь с командой разработки  
+- Проверьте раздел устранения неполадок  
 
 ---
 
-**Built with ❤️ for Lethai Concierge Services**
+**Создано с ❤️ для Lethai Concierge Services**  
 
-
-
+---
