@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  lethai-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lethai-referral-bot
+    restart: unless-stopped
+    
+    # Environment variables
+    env_file:
+      - .env
+    
+    # Volume mounts
+    volumes:
+      - ./credentials.json:/app/credentials.json:ro
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - bot-db:/app/users.db
+    
+    # Network configuration
+    networks:
+      - bot-network
+    
+    # Resource limits
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+    
+    # Health check (process-based for polling bot)
+    healthcheck:
+      test: ["CMD-SHELL", "pgrep -f 'python.*main.py' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: Redis for future scalability
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: lethai-redis
+  #   restart: unless-stopped
+  #   networks:
+  #     - bot-network
+  #   volumes:
+  #     - redis-data:/data
+  #   command: redis-server --appendonly yes
+
+volumes:
+  bot-db:
+    driver: local
+  # redis-data:
+  #   driver: local
+
+networks:
+  bot-network:
+    driver: bridge
+
+
+
