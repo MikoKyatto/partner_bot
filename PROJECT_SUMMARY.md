@@ -1,226 +1,223 @@
-# Lethai Concierge Referral Bot - Project Summary
+# Обзор проекта Lethai Concierge Referral Bot 🏝️
 
-## 🎯 Project Overview
+## 🎯 О проекте
 
-This is a complete, production-ready Telegram bot for the Lethai concierge service referral program. The bot provides a comprehensive referral system with unique links, QR code generation, Google Sheets integration, and admin approval workflow.
+Это готовый к продакшену Telegram-бот для реферальной программы Lethai Concierge. Бот предоставляет полноценную систему рефералов с уникальными ссылками, генерацией QR-кодов, интеграцией с Google Sheets и процессом одобрения пользователей администратором.
 
-## ✅ Completed Features
+## ✅ Реализованные функции
 
-### Core Functionality
-- ✅ **User Registration Flow**: Contact sharing and name input with FSM
-- ✅ **Admin Approval System**: Inline buttons for approve/reject with notifications
-- ✅ **Referral Link Generation**: Unique links with partner codes
-- ✅ **QR Code Generation**: Beautiful branded QR codes with Lethai design
-- ✅ **Balance Tracking**: Google Sheets integration with automatic calculation
-- ✅ **Main Menu System**: Reply keyboard with all user functions
+### Основной функционал
+- ✅ **Регистрация пользователей**: Ввод контакта и имени через FSM
+- ✅ **Система одобрения админом**: Кнопки "Одобрить/Отклонить" с уведомлениями
+- ✅ **Генерация реферальных ссылок**: Уникальные ссылки с кодами партнёров
+- ✅ **Генерация QR-кодов**: Стильные QR-коды с брендингом Lethai
+- ✅ **Учёт балансов**: Интеграция с Google Sheets для автоматического расчёта
+- ✅ **Главное меню**: Удобная клавиатура с функциями для пользователей
 
-### Technical Implementation
-- ✅ **SQLite Database**: User storage with approval workflow
-- ✅ **Google Sheets API**: Read/write operations with error handling
-- ✅ **Docker Support**: Multi-stage build with security best practices
-- ✅ **Unit Tests**: Comprehensive test coverage for all modules
-- ✅ **Error Handling**: Graceful error handling with user-friendly messages
-- ✅ **Logging**: Structured logging with rotation and different levels
+### Техническая реализация
+- ✅ **База данных SQLite**: Хранение данных пользователей с процессом одобрения
+- ✅ **Google Sheets API**: Чтение/запись данных с обработкой ошибок
+- ✅ **Поддержка Docker**: Многоэтапная сборка с лучшими практиками безопасности
+- ✅ **Модульные тесты**: Полное покрытие всех модулей тестами
+- ✅ **Обработка ошибок**: Понятные сообщения для пользователей
+- ✅ **Логирование**: Структурированное логирование с ротацией и уровнями
 
-### Security & Production
-- ✅ **Environment Variables**: Secure configuration management
-- ✅ **Input Validation**: Name length, phone format validation
-- ✅ **Non-root Docker User**: Security best practices
-- ✅ **Rate Limiting**: Built-in aiogram rate limiting
-- ✅ **Health Checks**: System monitoring and status checks
+### Безопасность и продакшен
+- ✅ **Переменные окружения**: Безопасное управление конфигурацией
+- ✅ **Валидация ввода**: Проверка длины имени и формата телефона
+- ✅ **Non-root пользователь Docker**: Соблюдение лучших практик безопасности
+- ✅ **Ограничение скорости**: Встроенное ограничение через aiogram
+- ✅ **Проверки состояния**: Мониторинг системы и её статуса
 
-## 📁 Project Structure
+## 📁 Структура проекта
 
 ```
 lethai-bot/
-├── handlers/                 # Bot command handlers
+├── handlers/                 # Обработчики команд бота
 │   ├── __init__.py
-│   ├── start.py             # Registration and main menu
-│   ├── admin.py             # Admin commands and approval
-│   └── menu.py              # User menu commands
-├── utils/                   # Utility modules
+│   ├── start.py             # Регистрация и главное меню
+│   ├── admin.py             # Команды админа и одобрение
+│   └── menu.py              # Команды пользовательского меню
+├── utils/                   # Вспомогательные модули
 │   ├── __init__.py
-│   ├── database.py          # SQLite operations
-│   ├── sheets.py            # Google Sheets integration
-│   └── qr_code.py           # QR code generation
-├── tests/                   # Unit tests
+│   ├── database.py          # Операции с SQLite
+│   ├── sheets.py            # Интеграция с Google Sheets
+│   └── qr_code.py           # Генерация QR-кодов
+├── tests/                   # Модульные тесты
 │   ├── __init__.py
-│   ├── test_handlers.py     # Handler tests
-│   ├── test_sheets.py       # Sheets integration tests
-│   ├── test_database.py     # Database tests
-│   └── test_qr_code.py      # QR code tests
-├── scripts/                 # Setup and deployment scripts
-│   ├── setup.sh            # Initial setup script
-│   └── deploy.sh           # Production deployment script
-├── main.py                  # Bot entry point
-├── config.py               # Configuration management
-├── health.py               # Health check utilities
-├── logging_config.py       # Logging configuration
-├── requirements.txt        # Python dependencies
-├── setup.py               # Package setup
-├── Makefile               # Development commands
-├── Dockerfile             # Docker configuration
-├── docker-compose.yml     # Docker Compose setup
-├── .dockerignore          # Docker ignore file
-├── .gitignore             # Git ignore file
-├── pytest.ini            # Test configuration
-├── env.example            # Environment template
-└── README.md              # Comprehensive documentation
+│   ├── test_handlers.py     # Тесты обработчиков
+│   ├── test_sheets.py       # Тесты интеграции с Sheets
+│   ├── test_database.py     # Тесты базы данных
+│   └── test_qr_code.py      # Тесты QR-кодов
+├── scripts/                 # Скрипты настройки и развертывания
+│   ├── setup.sh            # Скрипт начальной настройки
+│   └── deploy.sh           # Скрипт развертывания в продакшене
+├── main.py                  # Точка входа бота
+├── config.py               # Управление конфигурацией
+├── health.py               # Утилиты проверки состояния
+├── logging_config.py       # Настройка логирования
+├── requirements.txt        # Зависимости Python
+├── setup.py               # Настройка пакета
+├── Makefile               # Команды для разработки
+├── Dockerfile             # Конфигурация Docker
+├── docker-compose.yml      # Настройки Docker Compose
+├── .dockerignore          # Игнорируемые файлы для Docker
+├── .gitignore             # Игнорируемые файлы для Git
+├── pytest.ini             # Конфигурация тестов
+├── env.example            # Шаблон переменных окружения
+└── README.md              # Полная документация
 ```
 
-## 🚀 Quick Start Commands
+## 🚀 Быстрый старт
 
-### Development Setup
+### Настройка для разработки
 ```bash
-# Clone and setup
-git clone <repository>
+# Клонирование и настройка
+git clone <репозиторий>
 cd lethai-bot
 ./scripts/setup.sh
 
-# Run locally
+# Локальный запуск
 python main.py
 
-# Run tests
+# Запуск тестов
 pytest
 ```
 
-### Docker Deployment
+### Развертывание через Docker
 ```bash
-# Build and run
+# Сборка и запуск
 docker-compose up --build
 
-# Production deployment
+# Развертывание в продакшене
 ./scripts/deploy.sh
 ```
 
-## 🔧 Configuration
+## 🔧 Конфигурация
 
-### Required Environment Variables
-- `BOT_TOKEN`: Telegram bot token
-- `SHEETS_ID`: Google Sheets ID
-- `ADMIN_USER_ID`: Admin Telegram ID
-- `ADMIN_GROUP_ID`: Admin notification group
-- `CREDENTIALS_PATH`: Google service account JSON path
+### Обязательные переменные окружения
+- `BOT_TOKEN`: Токен Telegram-бота
+- `SHEETS_ID`: ID Google Sheets
+- `ADMIN_USER_ID`: Telegram ID администратора
+- `ADMIN_GROUP_ID`: ID группы для уведомлений админов
+- `CREDENTIALS_PATH`: Путь к JSON-файлу сервисного аккаунта Google
 
-### Google Sheets Setup
-1. Create Google Cloud Project
-2. Enable Sheets API
-3. Create Service Account
-4. Download credentials as `credentials.json`
-5. Share sheet with service account email
+### Настройка Google Sheets
+1. Создайте проект в Google Cloud
+2. Активируйте Sheets API
+3. Создайте сервисный аккаунт
+4. Скачайте ключи как `credentials.json`
+5. Откройте доступ к таблице для email сервисного аккаунта
 
-## 🎨 QR Code Design
+## 🎨 Дизайн QR-кодов
 
-- **Size**: 512x512 pixels
-- **Background**: Dark green (#1A3C34)
-- **QR Code**: 400x400 pixels, centered
-- **Branding**: "Lethai" text in white
-- **Decoration**: Palm tree silhouettes
-- **Format**: High-quality JPEG
+- **Размер**: 512x512 пикселей
+- **Фон**: Тёмно-зелёный (#1A3C34)
+- **QR-код**: 400x400 пикселей, по центру
+- **Брендинг**: Текст "Lethai" белым цветом
+- **Декор**: Силуэты пальм
+- **Формат**: Высококачественный JPEG
 
-## 📊 User Flow
+## 📊 Путь пользователя
 
-1. **Registration**: User sends `/start` and shares contact
-2. **Approval**: Admin reviews and approves in admin panel
-3. **Access**: Approved users get referral features
-4. **Referrals**: Users share unique links and earn bonuses
-5. **Balance**: Automatic tracking in Google Sheets
+1. **Регистрация**: Пользователь отправляет `/start` и делится контактом
+2. **Одобрение**: Админ проверяет и одобряет в панели
+3. **Доступ**: Одобренные пользователи получают реферальные функции
+4. **Рефералы**: Пользователи делятся уникальными ссылками и зарабатывают бонусы
+5. **Баланс**: Автоматический учёт в Google Sheets
 
-## 🛡️ Security Features
+## 🛡️ Безопасность
 
-- Environment variable configuration
-- Non-root Docker user
-- Input validation and sanitization
-- SQL injection protection
-- Error handling and logging
-- Rate limiting
+- Конфигурация через переменные окружения
+- Non-root пользователь в Docker
+- Валидация и очистка ввода
+- Защита от SQL-инъекций
+- Обработка ошибок и логирование
+- Ограничение скорости запросов
 
-## 🧪 Testing
+## 🧪 Тестирование
 
-- **Unit Tests**: 100+ test cases covering all modules
-- **Integration Tests**: Database and Sheets integration
-- **Error Handling**: Comprehensive error scenarios
-- **Mocking**: External API mocking for reliable tests
+- **Модульные тесты**: Более 100 тестов для всех модулей
+- **Интеграционные тесты**: Проверка базы данных и Google Sheets
+- **Обработка ошибок**: Тестирование всех сценариев ошибок
+- **Мокирование**: Надёжное тестирование внешних API
 
-## 📈 Monitoring
+## 📈 Мониторинг
 
-- **Health Checks**: Database, Sheets, file system
-- **Logging**: Structured logging with rotation
-- **Status Monitoring**: Container and service status
-- **Error Tracking**: Detailed error logging
+- **Проверки состояния**: База данных, Google Sheets, файловая система
+- **Логирование**: Структурированное с ротацией
+- **Мониторинг статуса**: Состояние контейнеров и сервисов
+- **Отслеживание ошибок**: Подробное логирование ошибок
 
-## 🔄 Deployment Options
+## 🔄 Варианты развертывания
 
-### Local Development
-- Python virtual environment
-- Direct execution with `python main.py`
+### Локальная разработка
+- Виртуальное окружение Python
+- Прямой запуск через `python main.py`
 
-### Docker Development
+### Разработка в Docker
 - `docker-compose up --build`
-- Volume mounts for development
+- Подключение томов для разработки
 
-### Production VPS
+### Продакшен на VPS
 - `./scripts/deploy.sh`
-- Systemd service integration
-- Health monitoring
+- Интеграция с systemd
+- Мониторинг состояния
 
-## 📚 Documentation
+## 📚 Документация
 
-- **README.md**: Comprehensive setup and usage guide
-- **Code Comments**: Detailed inline documentation
-- **Type Hints**: Full type annotation coverage
-- **Docstrings**: Function and class documentation
+- **README.md**: Полное руководство по настройке и использованию
+- **Комментарии в коде**: Подробная документация в коде
+- **Аннотации типов**: Полное покрытие типов
+- **Докстринги**: Документация функций и классов
 
-## 🎯 Key Features Implemented
+## 🎯 Реализованные ключевые функции
 
-### Bot Commands
-- `/start` - Registration and main menu
-- `/admin` - Admin panel for user approval
-- `/stats` - System statistics
-- `/users` - List approved users
+### Команды бота
+- `/start` — Регистрация и главное меню
+- `/admin` — Панель администрирования
+- `/stats` — Статистика системы
+- `/users` — Список одобренных пользователей
 
-### User Interface
-- Reply keyboards for easy navigation
-- Inline buttons for admin actions
-- Contact sharing for registration
-- QR code images with branding
+### Пользовательский интерфейс
+- Удобные клавиатуры для навигации
+- Инлайн-кнопки для действий админа
+- Шаринг контакта для регистрации
+- QR-коды с брендингом
 
-### Admin Features
-- Pending user list with details
-- Approve/reject with inline buttons
-- Automatic notifications
-- Google Sheets integration
+### Функции админа
+- Список пользователей на одобрение с деталями
+- Одобрение/отклонение через инлайн-кнопки
+- Автоматические уведомления
+- Интеграция с Google Sheets
 
-### Data Management
-- SQLite for user storage
-- Google Sheets for balance tracking
-- Automatic partner code addition
-- Balance calculation and display
+### Управление данными
+- SQLite для хранения данных пользователей
+- Google Sheets для учёта балансов
+- Автоматическое добавление кодов партнёров
+- Расчёт и отображение баланса
 
-## 🏆 Production Ready Features
+## 🏆 Готовность к продакшену
 
-- **Scalability**: Docker containerization
-- **Reliability**: Comprehensive error handling
-- **Security**: Best practices implementation
-- **Monitoring**: Health checks and logging
-- **Testing**: Full test coverage
-- **Documentation**: Complete setup guides
+- **Масштабируемость**: Контейнеризация через Docker
+- **Надёжность**: Полная обработка ошибок
+- **Безопасность**: Реализация лучших практик
+- **Мониторинг**: Проверки состояния и логирование
+- **Тестирование**: Полное покрытие тестами
+- **Документация**: Полные руководства по настройке
 
-## 🎉 Ready for Deployment
+## 🎉 Готов к запуску
 
-The bot is fully functional and ready for production deployment. All requirements from the original specification have been implemented:
+Бот полностью функционален и готов к развертыванию в продакшене. Все требования из исходной спецификации реализованы:
 
-- ✅ Unique referral links with partner codes
-- ✅ QR code generation with Lethai branding
-- ✅ Google Sheets integration for balance tracking
-- ✅ Admin approval workflow
-- ✅ Docker containerization
-- ✅ Comprehensive unit tests
-- ✅ Production-ready configuration
-- ✅ Security best practices
-- ✅ Complete documentation
+- ✅ Уникальные реферальные ссылки с кодами партнёров
+- ✅ Генерация QR-кодов с брендингом Lethai
+- ✅ Интеграция с Google Sheets для учёта балансов
+- ✅ Процесс одобрения админом
+- ✅ Контейнеризация через Docker
+- ✅ Полное покрытие модульными тестами
+- ✅ Конфигурация для продакшена
+- ✅ Соблюдение лучших практик безопасности
+- ✅ Полная документация
 
-The project follows "unicorn-style" development with clean code, robust error handling, and a visually appealing QR code design as requested.
-
-
-
+Проект выполнен в "unicorn-стиле" с чистым кодом, надёжной обработкой ошибок и визуально привлекательным дизайном QR-кодов.
