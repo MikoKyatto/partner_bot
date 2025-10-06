@@ -186,7 +186,7 @@ async def get_balance_async(partnercode: str) -> float:
     """Get balance for partnercode (async version)"""
     return await asyncio.to_thread(_get_balance_sync, partnercode)
 
-def _get_worksheet_info_sync() -> dict:
+#def _get_worksheet_info_sync() -> dict:
     """Synchronous get worksheet info"""
     try:
         client = get_client()
@@ -206,7 +206,6 @@ def _get_worksheet_info_sync() -> dict:
     except Exception as e:
         logger.error(f"Error getting worksheet info: {e}")
         return {}
-
 def _get_balance_sync(partnercode: str) -> float:
     """Synchronous get balance for partnercode, skipping first 4 columns"""
     try:

@@ -207,39 +207,6 @@ def _get_worksheet_info_sync() -> dict:
         logger.error(f"Error getting worksheet info: {e}")
         return {}
 
-def _get_balance_sync(partnercode: str) -> float:
-    """Synchronous get balance for partnercode, skipping first 4 columns"""
-    try:
-        client = get_client()
-        sheet = client.open_by_key(config.SHEETS_ID)
-        worksheet = sheet.worksheet(config.SHEET_NAME)
-        
-        # Find row
-        cell = worksheet.find(partnercode, in_column=1)
-        if not cell:
-            logger.warning(f"Partnercode {partnercode} not found")
-            return 0.0
-        
-        # Get row values
-        row_values = worksheet.row_values(cell.row)
-        if not row_values:
-            return 0.0
-        
-        # Sum numeric values starting from 5th column (index 4)
-        balance = 0.0
-        for value in row_values[4:]:
-            try:
-                balance += float(value)
-            except ValueError:
-                continue
-        
-        logger.info(f"Balance for {partnercode}: {balance}")
-        return balance
-        
-    except Exception as e:
-        logger.error(f"Error getting balance for {partnercode}: {e}")
-        return 0.0
-        
 def get_worksheet_info() -> dict:
     """Get worksheet info (synchronous wrapper for backwards compatibility)"""
     return _get_worksheet_info_sync()

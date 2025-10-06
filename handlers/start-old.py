@@ -178,45 +178,16 @@ async def process_name(message: types.Message, state: FSMContext):
         success = save_user(user_id, name, phone, approved=False)
         
         if success:
-            # Notify admin group with avatar and chat button
+            # Notify admin group
             try:
-                from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-                
-                # Get user profile photos
-                photos = await message.bot.get_user_profile_photos(user_id, limit=1)
-                photo = None
-                if photos.total_count > 0:
-                    photo = photos.photos[0][-1].file_id
-
-                # Create inline keyboard with button to open chat
-                keyboard = InlineKeyboardMarkup(
-                    inline_keyboard=[
-                        [InlineKeyboardButton(text="💬 Написать партнеру", url=f"tg://user?id={user_id}")]
-                    ]
+                await message.bot.send_message(
+                    chat_id=get_admin_group_id(),
+                    text=f"🆕 Новая регистрация в реферальной системе:\n\n"
+                         f"👤 ID: {user_id}\n"
+                         f"📝 Имя: {name}\n"
+                         f"📱 Телефон: {phone}\n\n"
+                         f"Используйте /admin для рассмотрения заявки."
                 )
-
-                # Send notification with photo if available
-                if photo:
-                    await message.bot.send_photo(
-                        chat_id=get_admin_group_id(),
-                        photo=photo,
-                        caption=f"🆕 Новая заявка\n\n"
-                                f"👤 {name}\n"
-                                f"📱 {phone}\n"
-                                f"🆔 {user_id}\n\n"
-                                f"Используйте /admin для рассмотрения",
-                        reply_markup=keyboard
-                    )
-                else:
-                    await message.bot.send_message(
-                        chat_id=get_admin_group_id(),
-                        text=f"🆕 Новая заявка\n\n"
-                             f"👤 {name}\n"
-                             f"📱 {phone}\n"
-                             f"🆔 {user_id}\n\n"
-                             f"Используйте /admin для рассмотрения",
-                        reply_markup=keyboard
-                    )
             except Exception as e:
                 logger.error(f"Error sending notification to admin group: {e}")
             

@@ -137,12 +137,25 @@ async def approve_user(callback: CallbackQuery):
                 except Exception as e:
                     logger.error(f"Error notifying user {user_id}: {e}")
                 
+                # Notify admin group
+                try:
+                    await callback.bot.send_message(
+                        chat_id=get_admin_group_id(),
+                        text=f"✅ Пользователь одобрен:\n\n"
+                             f"👤 ID: {user_id}\n"
+                             f"📝 Имя: {user['name']}\n"
+                             f"📱 Телефон: {user['phone']}\n"
+                             f"🔗 Реферальная ссылка: https://taplink.cc/lakeevainfo?ref={user_id}"
+                    )
+                except Exception as e:
+                    logger.error(f"Error notifying admin group: {e}")
                 
                 await callback.answer("✅ Пользователь одобрен!", show_alert=True)
                 
-                # Update the original message (keep short)
+                # Update the message
                 await callback.message.edit_text(
-                    f"✅ {user['name']} (ID: {user_id}) одобрен!"
+                    f"✅ Пользователь {user['name']} (ID: {user_id}) одобрен!\n\n"
+                    f"Реферальная ссылка: https://taplink.cc/lakeevainfo?ref={user_id}"
                 )
             else:
                 await callback.answer("❌ Ошибка при добавлении в Google Sheets.", show_alert=True)
@@ -180,20 +193,23 @@ async def reject_user(callback: CallbackQuery):
         except Exception as e:
             logger.error(f"Error notifying user {user_id}: {e}")
         
-        # Notify admin group (short message, no duplication)
+        # Notify admin group
         try:
             await callback.bot.send_message(
                 chat_id=get_admin_group_id(),
-                text=f"❌ {user['name']} отклонен"
+                text=f"❌ Пользователь отклонен:\n\n"
+                     f"👤 ID: {user_id}\n"
+                     f"📝 Имя: {user['name']}\n"
+                     f"📱 Телефон: {user['phone']}"
             )
         except Exception as e:
             logger.error(f"Error notifying admin group: {e}")
         
         await callback.answer("❌ Пользователь отклонен!", show_alert=True)
         
-        # Update the original message (keep short)
+        # Update the message
         await callback.message.edit_text(
-            f"❌ {user['name']} (ID: {user_id}) отклонен!"
+            f"❌ Пользователь {user['name']} (ID: {user_id}) отклонен."
         )
         
     except Exception as e:

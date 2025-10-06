@@ -1,6 +1,8 @@
 # Multi-stage Dockerfile for Lethai Concierge Referral Bot
 FROM python:3.11-slim as base
-
+RUN apt-get update && \
+    apt-get install -y fonts-dejavu-core && \
+    rm -rf /var/lib/apt/lists/*
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
@@ -45,6 +47,4 @@ EXPOSE 8080
 
 # Default command
 CMD ["python", "main.py"]
-
-
 

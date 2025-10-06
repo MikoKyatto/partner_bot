@@ -16,21 +16,18 @@ QR_OPACITY = 180  # 0..255, степень непрозрачности QR-фо�
 
 def get_font() -> Optional[ImageFont.FreeTypeFont]:
     """
-    Get the Roboto font, fallback to default if not available
+    Загружает системный шрифт в Docker (DejaVuSans),
+    если не найден — возвращает встроенный по умолчанию.
     """
     try:
-        font_paths = [
-            "/System/Library/Fonts/Helvetica.ttc",  # macOS
-            "/usr/share/fonts/truetype/roboto/Roboto-Regular.ttf",  # Linux
-            "C:/Windows/Fonts/arial.ttf",  # Windows
-        ]
-        
-        for font_path in font_paths:
-            if os.path.exists(font_path):
-                return ImageFont.truetype(font_path, FONT_SIZE)
-        return ImageFont.load_default()
+        font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf"
+        if os.path.exists(font_path):
+            return ImageFont.truetype(font_path, FONT_SIZE)
+        else:
+            logger.warning(f"Font not found at {font_path}, using default font")
+            return ImageFont.load_default()
     except Exception as e:
-        logger.warning(f"Could not load custom font, using default: {e}")
+        logger.warning(f"Could not load custom font: {e}")
         return ImageFont.load_default()
 
 def _make_qr_on_transparent_bg(url: str) -> Image.Image:
@@ -119,7 +116,7 @@ def generate_qr_code_bytes(partnercode: str) -> Optional[bytes]:
         text = "Lethai services"
         bbox = draw.textbbox((0, 0), text, font=font)
         text_width = bbox[2] - bbox[0]
-        text_x = (IMAGE_SIZE - text_width) // 2 + 84
+        text_x = (IMAGE_SIZE - text_width) // 2 + 54
         text_y = qr_y + QR_SIZE + 20
         draw.text((text_x, text_y), text, fill=TEXT_COLOR, font=font)
         
